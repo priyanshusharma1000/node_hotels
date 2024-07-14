@@ -1,0 +1,2 @@
+we are having multiple end points for person in server.js for example get,post of person , parametrized endpoint on the basis of worktype and it is the case of only one model person we have multiple model in the project and in model we have around 10 end points so to modularize code we use express router midlleware
+express router end points ko manage karta h 

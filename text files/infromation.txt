@@ -1,0 +1,9 @@
+npm init command se apan ne server create kiya h basically npm ek database bol lo ya library bol lo jaha aapko sabhi tarike ka package miljaaega
+jese he apan ne npm init se server create kiya wese he hame package.json file milte h jo ke contain karte h saari details jo ke hamne npm init ke time de the 
+npm ek kapda ka dukan h waha se hame kuch bhi jarurat ke hisab se kharid sakte h 
+ab maan lo mujhe express package chahiye to me terminal me command dallonga npm i express
+to ye command terminal me run karne ke baad hame node module naam se package milega usme express bhi hogi
+npm se aap kuch bhi kharido wo node module folder me laake patak dega
+or saath he saath ek file or bna package log.json ye saari depencies btata 
+package.json gahr ke information store karta h or kuch extra meta deta hota h lekin packagelog.json descriptive version he usme saari information contain karta h he ke kitne package install h or wo kin kin package pe depend h wo saari information store karta h 
+ 
