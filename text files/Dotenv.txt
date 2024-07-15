@@ -4,3 +4,5 @@ its particularly useful for keeping sensitive data like api keys,database connec
 
 kese data store hota h 
 VAR_NAME=VALUE
+
+ye .env file manager aapko via email send karta h
