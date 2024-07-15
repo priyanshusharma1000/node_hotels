@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const db = require('./db');
+require('dotenv').config();// server ko  pta h ke iske pass ek dotenv file h
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());//body parser kisi bhi type of data like json , url coded,raw data ko process karke javascript object me convert karta h  yaha apan keval json data pe game khel rhe h isliye hamne bodyparser.json() use kiya or body-parser ka output req.body me store hoga
 const person = require('./models/person');
+const PORT = process.env.PORT || 3000;
 
 
 app.get('/',function(req,res){
@@ -30,7 +32,9 @@ const personRoutes = require('./routes/personRoutes');
 //use the routers
 app.use('/person',personRoutes);
 
-app.listen(3000,()=>{
+
+
+app.listen(PORT,()=>{
   console.log('listening on port 3000')
 })
  // cooment added for testing

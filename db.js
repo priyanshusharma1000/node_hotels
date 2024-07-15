@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Define the mongodb url connection url
 
-const mongoURL = 'mongodb://localhost:27017/hotels' // Replace 'mydatabase with your database name to hamne usee hotel naam de diya h or jese he connection establish hoga to hotels name ka database create ho jaaega
+//const mongoURL = Process.env.MONGODB_URL_LOCAL // Replace 'mydatabase with your database name to hamne usee hotel naam de diya h or jese he connection establish hoga to hotels name ka database create ho jaaega
+const mongoURL = process.env.MONGODB_URL;
 
 // set MongoDB connection
-mongoose.connect(mongoURL,{
- 
-})
+mongoose.connect(mongoURL);
 
 // mongoose hamesa ek object bnake rakhta h jo ke responsible hota h connection establishment me 
 // or isse db ka use karke apan node or mongo db me bridge establish karenge

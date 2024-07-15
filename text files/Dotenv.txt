@@ -1,0 +1,6 @@
+Dotenv module in node.js is used to manage sonfiguration variable and sensitive information in your application
+aap aapna name or passwprd github pe nahi daal sakte to usko hide karne ke liye apan dotenv ka use karte hide
+its particularly useful for keeping sensitive data like api keys,database connection string,and other enviromental-specific configuration separate from your code
+
+kese data store hota h 
+VAR_NAME=VALUE
