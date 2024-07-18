@@ -1,9 +1,9 @@
 const express=require('express');
 const router = express.Router();
 const person = require('./../models/person');
-
-
-router.post('/',async(req,res)=>{
+const {jwtAuthMiddleware,genrateToken} = require('./../jwt');
+// we want ke jese h user signup kare to turant ussse token mile
+router.post('/signup',async(req,res)=>{
   try{
      const data = req.body// assume request bosy contain the person data
 
@@ -15,7 +15,16 @@ router.post('/',async(req,res)=>{
 
      const response = await newPerson.save();
      console.log('data saved');
-     res.status(200).json(response);
+
+    //data save ho gya ab hum chahte h kiyahi hum token genrate karde
+     const payload = {
+      id:response.id,
+      username:response.username
+     }
+     console.log(JSON.stringify(payload));
+     const token = genrateToken(payload);
+     console.log('Token is:',token);
+     res.status(200).json({response:response,token:token});
   }
   catch(err){
     console.log(err);
@@ -24,8 +33,49 @@ router.post('/',async(req,res)=>{
   }
 
 })
+// login route
+router.post('/login',async (req,res)=>{
+  try{
+    // extract usrname and password
+    const {username,password} = req.body;
 
-router.get('/',async(req,res)=>{
+    const user = await person.findOne({username:username});
+
+    if(!user || !user.comparePassword(password)){
+      return res.status(401).json({error:'invalid username or password'});
+    }
+
+    // user bhi sahi h password sahi h ab token genrate karte h 
+    const payload = {
+      id:user.id,
+      username:user.username
+    }
+    const token = genrateToken(payload);
+    // return token as response
+    res.json({token});
+
+  }catch(err){
+     console.error(err);
+     res.status(500).json({error:'internal server error'});
+  }
+});
+// profile routes
+router.get('/profile',jwtAuthMiddleware,async(req,res)=>{
+  try{
+     const userData = req.user;// token ko jwt website pe jaake dekh lo wo payload information carry karega here username and id + issue at and expire at we utilize this data 
+     console.log("userdata :",userData);
+     const userId = userData.id;
+     const user = await person.findById(userId);
+     res.status(200).json({user});
+  }
+  catch(err){
+    console.error(err);
+    res.status(500).json({error:'Internal server error'});
+  }
+})
+// yaha apan ne upper token ke madad se userid nikali or userid se user or uska profile print kar diya
+
+router.get('/',jwtAuthMiddleware,async(req,res)=>{
    try{
      const data = await person.find();
      console.log('data fetched');
